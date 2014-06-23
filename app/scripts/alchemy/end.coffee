@@ -16,8 +16,37 @@
 
 alchemy.begin = (userConf) ->
     alchemy.conf = _.assign({}, alchemy.defaults, userConf)
-    if typeof alchemy.conf.dataSource == 'string'
+
+    if alchemy.conf.dataSource == null
+        no_results = """
+                    <div class="modal fade" id="no-results">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Congratulations!</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>You've got Alchemy.js up and running!</p>
+                                    <p>Check out the <a href="https://github.com/GraphAlchemist/Alchemy/wiki">documentation</a>
+                                       for examples and help getting started.</p>
+                                    <p>In the meantime, we've set up a sample graph for you to play around with.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   """
+        $('body').append(no_results)
+        $('#no-results').modal('show')
+  
+        alchemy.conf = _.assign({}, alchemy.defaults, alchemy.welcomeConf)
+        d3.json("../sample_data/default.json", alchemy.startGraph)
+        
+    else if typeof alchemy.conf.dataSource == 'string'
         d3.json(alchemy.conf.dataSource, alchemy.startGraph)
     else if typeof alchemy.conf.dataSource == 'object'
         alchemy.startGraph(alchemy.conf.dataSource)
-        
+    
