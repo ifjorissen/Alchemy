@@ -12,9 +12,9 @@
 
         <!-- endbower -->
         <!-- endbuild -->
-        <!-- build:css(.tmp) styles/main.css -->
+        <!-- build:css(.tmp) styles/main.css -->>
+        <link rel="stylesheet" type="text/css" href="../styles/alchemy.min.css">
         <link rel="stylesheet" href="styles/main.css">
-        <link rel="stylesheet" href="styles/alchemy.css">
         <!-- endbuild -->
         <!-- build:js scripts/vendor/modernizr.js -->
         <script src="../bower_components/modernizer/modernizr.js"></script>
@@ -58,26 +58,42 @@
                 <div class="col-md-12" id ="team-info">
                     <h2>Meet the Team</h2>
                     <div id ="team-svg">
-                        <div class = "alchemy" id="alchemy">placeholder for svg</div>
+                        <div class = "alchemy"></div>
                     </div>
                     <div class = "col-md-6" id ="team-html">
-                    <h3>Config</h3>
+                    <h3>Configuration and HTML</h3>
                     <pre>
+                        <p class="filename">HTML and Configuration</p>
                         <code>
-var config = {
-    dataSource: 'data/contrib.json',
-    graphHeight: 260,
-    graphWidth: 300,
-    
-    linkDistance: function(){ return 40; },
+                          &lt;html&gt;
+                            &lt;head&gt;
+                              &lt;link rel=&quot;stylesheet&quot; href=&quot;../dist/styles/vendor.css&quot;/&gt;
+                              &lt;link rel=&quot;stylesheet&quot; href=&quot;../dist/alchemy.min.css&quot;/&gt;
+                            &lt;/head&gt;
+                            &lt;body&gt;
+                              &lt;div class=&quot;alchemy&quot; id=&quot;graph&quot;&gt;&lt;/div&gt;
+                          
+                              &lt;script src=&quot;../dist/scripts/vendor.js&quot;&gt;&lt;/script&gt;
+                              &lt;script src=&quot;../dist/alchemy.min.js&quot;&gt;&lt;/script&gt;
+                              &lt;script type=&quot;text/javascript&quot;&gt;
 
-    nodeTypes: {"node_type":["GA CEO", "GA Employee", "Contributor"]},
-    caption: function(node){ return node.caption; }
-};
+                                  var config = {
+                                      dataSource: 'data/contrib.json',
+                                      graphHeight: 260,
+                                      graphWidth: 300,
+                                      
+                                      linkDistance: function(){ return 40; },
 
-alchemy.begin(config)
+                                      nodeTypes: {"node_type":["GA CEO", "GA Employee", "Contributor"]},
+                                      caption: function(node){ return node.caption; }
+                                      };
+
+                                  alchemy.begin(config)
+                              &lt;/script&gt;
+                            &lt;/body&gt;
+                          &lt;/html&gt;
                         </code>
-                    </pre>
+                      </pre>
                 </div>
 
                 <div class="col-md-6" id="team-data">
@@ -156,9 +172,24 @@ alchemy.begin(config)
         <!-- bower:js -->
         <script src="../bower_components/jquery/dist/jquery.js"></script>
         <script src="../bower_components/d3/d3.js"></script>
+        <script src="scripts/vendor.js"></script>
         <script src="scripts/alchemy.js"></script>
         <script src="scripts/else.js"></script>
         <script type="text/javascript" src="scripts/tooltip.js"></script>
+
+        <script type="text/javascript">
+            var config = {
+                dataSource: 'examples/data/contrib.json',
+                // graphHeight: 260,
+                // graphWidth: 300,
+
+                linkDistance: function(){ return 40; },
+
+                nodeTypes: {"node_type":["GA CEO", "GA Employee", "Contributor"]},
+                caption: function(node){ return node.caption; }
+            };
+            alchemy.begin(config)
+        </script>
         <!-- endbower -->
         <!-- endbuild -->
 
