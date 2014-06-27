@@ -21,6 +21,7 @@ body{
 	}
 }
 .nav-pills{
+	padding-right: 20px;
 	padding-top: 10px;
 	float: right;
 	> li + li {
@@ -42,6 +43,10 @@ body{
 		}
 	}
 }
+.tooltip{
+	// background-color: $blue !important;
+}
+
 #sm-alchemy-logo{
 	padding: 20px 0;
 	img{
