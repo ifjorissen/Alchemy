@@ -54,6 +54,7 @@ class alchemy.drawing.DrawNode
 
 
             if editorEnabled
+                console.log "editor enabled"
                 editorInteractions = new alchemy.editor.Interactions
                 node.on('mouseup', editorInteractions.nodeMouseUp)
                     .on('mouseover', editorInteractions.nodeMouseOver)
@@ -61,12 +62,12 @@ class alchemy.drawing.DrawNode
                     .on('dblclick', coreInteractions.nodeDoubleClick)
                     .on('click', editorInteractions.nodeClick)
 
-                # drag = d3.behavior.drag()
-                #     .origin(Object)
-                #     .on("dragstart", editorInteractions.addNodeStart)
-                #     .on("drag", editorInteractions.addNodeDragging)
-                #     .on("dragend", editorInteractions.addNodeDragended)
-                # node.call(drag)
+                drag = d3.behavior.drag()
+                    .origin(Object)
+                    .on("dragstart", editorInteractions.addNodeStart)
+                    .on("drag", editorInteractions.addNodeDragging)
+                    .on("dragend", editorInteractions.addNodeDragended)
+                node.call(drag)
 
             else 
                 node

@@ -163,7 +163,8 @@ alchemy.interactions =
         d3.select('.alchemy svg').classed({'highlight-active':false})
 
         if alchemy.conf.showEditor is true
-            alchemy.modifyElements.nodeEditorClear()
+            editor = new alchemy.editor.Editor
+            editor.editorClear()
 
         alchemy.vis.selectAll('line.edge')
             .classed('highlighted connected unconnected', false)

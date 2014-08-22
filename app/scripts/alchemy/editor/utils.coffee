@@ -3,12 +3,12 @@ class alchemy.editor.Utils
         @drawNodes = new alchemy.drawing.DrawNodes
         @drawEdges = new alchemy.drawing.DrawEdges
 
+
     enableEditor: () =>
         alchemy.setState("interactions", "editor")
         dragLine = alchemy.vis
             .append("line")
             .attr("id", "dragline")
-
         @drawNodes.updateNode(alchemy.node)
         @drawEdges.updateEdge(alchemy.edge)
         selectedElements = d3.selectAll(".selected")
@@ -44,6 +44,7 @@ class alchemy.editor.Utils
         d3.selectAll(".node").classed("selected":false)
 
     remove: () ->
+        editor = new alchemy.editor.Editor
         selectedNodes = d3.selectAll(".selected.node")
         for node in selectedNodes[0]
             nodeID = d3.select(node).data()[0].id
@@ -58,7 +59,7 @@ class alchemy.editor.Utils
                 alchemy.node = alchemy.node.data(_.map(alchemy._nodes, (n) -> n._d3), (n)->n.id)
                 d3.select(node).remove()
                 if alchemy.getState("interactions") is "editor"
-                    alchemy.modifyElements.nodeEditorClear()
+                    editor.editorClear()
 
     addNode: (node) ->
         newNode = alchemy._nodes[node.id] = new alchemy.models.Node({id:"#{node.id}"})
@@ -74,13 +75,13 @@ class alchemy.editor.Utils
     update: (node, edge) ->
         #only push the node if it didn't previously exist
         if !@mouseUpNode
-            alchemy.editor.addNode(node)
-            alchemy.editor.addEdge(edge)
+            @addNode(node)
+            @addEdge(edge)
             @drawEdges.createEdge(alchemy.edge)
             @drawNodes.createNode(alchemy.node)
 
         else
-            alchemy.editor.addEdge(edge)
+            @addEdge(edge)
             @drawEdges.createEdge(alchemy.edge)
 
         # force = new alchemy.layout.force

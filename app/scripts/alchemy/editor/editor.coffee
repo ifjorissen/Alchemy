@@ -84,10 +84,10 @@ class alchemy.editor.Editor
                             return """Enable Editor Interactions""")
                 )
 
-        editor.select("#element-options ul #remove")
-            .on("click", -> alchemy.editor.remove())
-
         utils = @utils
+
+        editor.select("#element-options ul #remove")
+            .on("click", -> utils.remove())
         
         editor_interactions.on "click", () -> 
                 if !d3.select("#editor-interactions").classed("active")

@@ -6,6 +6,7 @@ class alchemy.editor.Interactions
     # @click = null
     constructor: ->
         @editor = new alchemy.editor.Editor
+        # @utils = new alchemy.editor.Utils
 
     nodeMouseOver: (n) ->
         if !d3.select(@).select("circle").empty()
@@ -75,7 +76,7 @@ class alchemy.editor.Interactions
                 @targetNode = {id: "#{_.uniqueId('addedNode_')}", x: parseFloat(targetX), y: parseFloat(targetY), caption: "node added"}
 
             @newEdge = {id: "#{@sourceNode.id}-#{@targetNode.id}", source: @sourceNode.id, target: @targetNode.id, caption: "edited"}   
-            alchemy.editor.update(@targetNode, @newEdge)
+            @editor.utils.update(@targetNode, @newEdge)
         
         @reset()
         @
@@ -85,7 +86,7 @@ class alchemy.editor.Interactions
             when 8, 46
                 if !(d3.select(d3.event.target).node().tagName is ("INPUT" or "TEXTAREA"))
                     d3.event.preventDefault()
-                    alchemy.editor.remove()
+                    @editor.utils.remove()
 
     reset: =>
         # reset interaciton variables
