@@ -37,6 +37,8 @@ class alchemy.models.Edge
             @setD3Property(property, alchemy._nodes[value]._d3)
             # update node internals
             #node.addEdge(@id)
+        if (property is 'caption')
+            @setD3Property(property, value)
 
     setD3Property: (property, value) =>
         @_d3[property] = value
