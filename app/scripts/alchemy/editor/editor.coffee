@@ -206,9 +206,17 @@ class alchemy.editor.Editor
 
         d3.selectAll("#add-prop-key, #add-prop-value, .property")
             .on "keydown", ->
+                # prevent enter key as a submit trigger
                 if d3.event.keyCode is 13
                     event.preventDefault()
                 d3.select(@).classed({"edited-property":true})
+
+        d3.selectAll(".property-value")
+            .on "keyup", ->
+                currentVal = d3.select(@)[0][0].value
+                d3.select(@).attr('value', currentVal)
+
+
 
         updateProperty = (key, value, newProperty) ->
             nodeID = n.id
@@ -221,6 +229,7 @@ class alchemy.editor.Editor
                     d3.select("#node-add-prop-value").attr("value", "property at #{key} updated to: #{value}")
                 else
                     d3.select("#node-#{key}-input").attr("value", "property at #{key} updated to: #{value}")
+                    d3.select("#node-#{key}").classed({"edited-property":false})
 
             else
                 if newProperty is true 

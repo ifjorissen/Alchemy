@@ -54,7 +54,6 @@ class alchemy.drawing.DrawNode
 
 
             if editorEnabled
-                console.log "editor enabled"
                 editorInteractions = new alchemy.editor.Interactions
                 node.on('mouseup', editorInteractions.nodeMouseUp)
                     .on('mouseover', editorInteractions.nodeMouseOver)
